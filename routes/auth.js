@@ -7,31 +7,22 @@ const config = require('config');
 module.exports = [
   {
     method: 'POST',
-    path: '/api/users',
+    path: '/api/auth',
     handler: async (request, h) => {
-      const { name, email, password } = request.payload;
+      const { email, password } = request.payload;
 
       try {
         let user = await User.findOne({ email });
 
-        // Check if user exists in the database
-        if (user) {
-          return h.response({ msg: 'User already exists' }).code(400);
+        if (!user) {
+          return h.response({ msg: 'Invalid Credentials' }).code(400);
         }
 
-        // Add new user object
-        user = new User({
-          name,
-          email,
-          password
-        });
+        const isMatch = await bcrypt.compare(password, user.password);
 
-        // Encrypt password
-        const salt = await bcrypt.genSalt(10);
-        user.password = await bcrypt.hash(password, salt);
-
-        // Store user in the database
-        await user.save();
+        if (!isMatch) {
+          return h.response({ msg: 'Invalid Credentials' }).code(400);
+        }
 
         const payload = {
           user: {
@@ -39,7 +30,6 @@ module.exports = [
           }
         };
 
-        // Generate the authentication token
         const token = jwt.sign(payload, config.get('jwtSecret'), {
           expiresIn: 360000
         });
@@ -52,10 +42,6 @@ module.exports = [
     options: {
       validate: {
         payload: {
-          name: Joi.string()
-            .min(1)
-            .max(30)
-            .required(),
           email: Joi.string()
             .email()
             .required(),

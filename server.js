@@ -13,24 +13,7 @@ const init = async () => {
   server.route(require('./routes/home'));
   server.route(require('./routes/about'));
   server.route(require('./routes/users'));
-
-  //   server.route({
-  //     method: 'POST',
-  //     path: '/post',
-  //     handler: function(request, h) {
-  //       return 'Blog post added';
-  //     },
-  //     options: {
-  //       validate: {
-  //         payload: {
-  //           post: Joi.string()
-  //             .min(1)
-  //             .max(140),
-  //           date: Joi.date().required()
-  //         }
-  //       }
-  //     }
-  //   });
+  server.route(require('./routes/auth'));
 
   await server.start();
   console.log('Server running on %s', server.info.uri);
