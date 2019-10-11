@@ -6,6 +6,36 @@ const config = require('config');
 
 module.exports = [
   {
+    method: 'GET',
+    path: '/api/auth',
+    handler: async (request, h) => {
+      const headers = request.headers;
+
+      const token = headers['x-auth-token'];
+
+      if (!token) {
+        return h.response({ msg: 'Authorization deined' });
+      }
+
+      try {
+        const decoded = jwt.verify(token, config.get('jwtSecret'));
+
+        request.user = decoded.user;
+      } catch (err) {
+        return h.response('Token is not valid').code(401);
+      }
+
+      try {
+        // get singed user
+        const user = await User.findById(request.user.id).select('-password');
+        return h.response({ user });
+      } catch (err) {
+        console.error(err.message);
+        return h.response('Server Error').code(500);
+      }
+    }
+  },
+  {
     method: 'POST',
     path: '/api/auth',
     handler: async (request, h) => {
