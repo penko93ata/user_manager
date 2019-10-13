@@ -16,7 +16,6 @@ const SearchBar = ({ searchProfiles, clearSearch, filtered }) => {
     if (text.current.value !== '') {
       searchProfiles(e.target.value);
     } else {
-      console.log('Fire clearSearch()');
       clearSearch();
     }
   };

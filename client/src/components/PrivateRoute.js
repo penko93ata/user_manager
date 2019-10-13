@@ -1,18 +1,19 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
 import { loadUser } from '../actions/authActions';
 
 const PrivateRoute = ({
-  commponent: Component,
   isAuthenticated,
   loading,
   loadUser,
+  user,
+  component: Component,
   ...rest
 }) => {
-  useEffect(() => {
-    loadUser();
-  });
+  // useEffect(() => {
+  //   loadUser();
+  // });
 
   return (
     <Route
@@ -30,7 +31,8 @@ const PrivateRoute = ({
 
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
-  loading: state.auth.loading
+  loading: state.auth.loading,
+  user: state.auth.user
 });
 
 export default connect(

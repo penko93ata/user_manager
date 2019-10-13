@@ -1,14 +1,21 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
+import M from 'materialize-css/dist/js/materialize.min.js';
 
-import { register } from '../../actions/authActions';
+import { register, clearErrors } from '../../actions/authActions';
 
-const Register = ({ register, isAuthenticated, history }) => {
+const Register = ({ register, isAuthenticated, error, history }) => {
   useEffect(() => {
     if (isAuthenticated) {
       history.push('/');
     }
-  }, [isAuthenticated, history]);
+
+    if (error === 'User already exists') {
+      // alert
+      M.toast({ html: error });
+      clearErrors();
+    }
+  }, [error, isAuthenticated, history]);
 
   const [user, setUser] = useState({
     name: '',
@@ -24,9 +31,9 @@ const Register = ({ register, isAuthenticated, history }) => {
   const onSubmit = e => {
     e.preventDefault();
     if (name === '' || email === '' || password === '' || password2 === '') {
-      console.log('Please enter all fields');
+      M.toast({ html: 'Please enter all fields' });
     } else if (password !== password2) {
-      console.log('Passwords do not match');
+      M.toast({ html: 'Passwords do not match' });
     } else {
       register({
         name,
@@ -105,10 +112,11 @@ const Register = ({ register, isAuthenticated, history }) => {
 // };
 
 const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated
+  isAuthenticated: state.auth.isAuthenticated,
+  error: state.auth.error
 });
 
 export default connect(
   mapStateToProps,
-  { register }
+  { register, clearErrors }
 )(Register);

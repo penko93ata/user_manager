@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { login, clearErrors } from '../../actions/authActions';
+import M from 'materialize-css/dist/js/materialize.min.js';
 
 const Login = ({ login, clearErrors, error, isAuthenticated, history }) => {
   useEffect(() => {
@@ -10,10 +11,10 @@ const Login = ({ login, clearErrors, error, isAuthenticated, history }) => {
 
     if (error === 'Invalid Credentials') {
       // alert
-      console.log(error);
+      M.toast({ html: error });
       clearErrors();
     }
-  }, [isAuthenticated, history, error, clearErrors]);
+  }, [isAuthenticated, history, clearErrors, error]);
 
   const [user, setUser] = useState({
     email: '',

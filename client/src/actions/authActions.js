@@ -19,20 +19,6 @@ export const setAuthToken = token => {
   }
 };
 
-// Authenticate user after register or login
-export const loadUser = () => async dispatch => {
-  if (localStorage.token) {
-    setAuthToken(localStorage.token);
-  }
-
-  try {
-    const res = await axios.get('/api/auth');
-    dispatch({ type: USER_LOADED, payload: res.data });
-  } catch (err) {
-    dispatch({ type: AUTH_ERROR });
-  }
-};
-
 // Register user
 export const register = formData => async dispatch => {
   const config = {
@@ -89,4 +75,18 @@ export const logout = () => dispatch => {
 // Clear errors
 export const clearErrors = () => dispatch => {
   dispatch({ type: CLEAR_ERRORS });
+};
+
+// Authenticate user after register or login
+export const loadUser = () => async dispatch => {
+  if (localStorage.token) {
+    setAuthToken(localStorage.token);
+  }
+
+  try {
+    const res = await axios.get('/api/auth');
+    dispatch({ type: USER_LOADED, payload: res.data });
+  } catch (err) {
+    dispatch({ type: AUTH_ERROR });
+  }
 };

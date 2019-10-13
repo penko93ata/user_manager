@@ -10,10 +10,10 @@ const Navbar = ({ logout, user, isAuthenticated }) => {
 
   const authLinks = (
     <Fragment>
-      <li>Hello {user && user.name}</li>
+      <li>Hello {user.name}</li>
       <li>
         <a onClick={onLogout} href="#!">
-          Logout
+          <i className="material-icons">exit_to_app</i>
         </a>
       </li>
     </Fragment>
@@ -21,9 +21,6 @@ const Navbar = ({ logout, user, isAuthenticated }) => {
 
   const guestLinks = (
     <Fragment>
-      <li>
-        <Link to="/">Home</Link>
-      </li>
       <li>
         <Link to="/register">Register</Link>
       </li>
@@ -36,18 +33,7 @@ const Navbar = ({ logout, user, isAuthenticated }) => {
   return (
     <nav className="blue">
       <div className="nav-wrapper">
-        <ul className="right">
-          {/* <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/login">Login</Link>
-          </li>
-          <li>
-            <Link to="/register">Register</Link>
-          </li> */}
-          {isAuthenticated ? authLinks : guestLinks}
-        </ul>
+        <ul className="right">{isAuthenticated ? authLinks : guestLinks}</ul>
       </div>
     </nav>
   );

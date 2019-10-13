@@ -30,7 +30,6 @@ const AddProfile = ({ addProfile }) => {
 
       // Clear form fields
       setProfile({});
-      console.log('Profile created');
     }
   };
 
