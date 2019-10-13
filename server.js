@@ -1,12 +1,11 @@
 const Hapi = require('@hapi/hapi');
 const connectDB = require('./config/db');
-const Joi = require('@hapi/joi');
 
 connectDB();
 
 const init = async () => {
   const server = Hapi.server({
-    port: process.env.PORT || 3100,
+    port: process.env.PORT || 5000,
     host: 'localhost'
   });
 
@@ -14,6 +13,7 @@ const init = async () => {
   server.route(require('./routes/about'));
   server.route(require('./routes/users'));
   server.route(require('./routes/auth'));
+  server.route(require('./routes/profiles'));
 
   await server.start();
   console.log('Server running on %s', server.info.uri);

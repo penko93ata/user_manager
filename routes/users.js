@@ -53,7 +53,7 @@ module.exports = [
       validate: {
         payload: {
           name: Joi.string()
-            .min(1)
+            .min(2)
             .max(30)
             .required(),
           email: Joi.string()

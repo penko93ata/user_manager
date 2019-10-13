@@ -14,7 +14,7 @@ module.exports = [
       const token = headers['x-auth-token'];
 
       if (!token) {
-        return h.response({ msg: 'Authorization deined' });
+        return h.response({ msg: 'Authorization deined' }).code(401);
       }
 
       try {
