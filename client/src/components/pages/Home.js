@@ -6,10 +6,12 @@ import EditProfile from '../profiles/EditProfile';
 import SearchBar from '../layout/SearchBar';
 import { connect } from 'react-redux';
 import { loadUser } from '../../actions/authActions';
+import M from 'materialize-css/dist/js/materialize.min.js';
 
 const Home = ({ loadUser }) => {
   useEffect(() => {
     loadUser();
+    M.AutoInit();
     // es-lint-disable-next-line
   }, [loadUser]);
 

@@ -3,10 +3,14 @@ import { connect } from 'react-redux';
 import { login, clearErrors } from '../../actions/authActions';
 import M from 'materialize-css/dist/js/materialize.min.js';
 import PropTypes from 'prop-types';
+import setAuthToken from '../setAuthToken';
 
 const Login = ({ login, clearErrors, error, isAuthenticated, history }) => {
   useEffect(() => {
     if (isAuthenticated) {
+      if (localStorage.token) {
+        setAuthToken(localStorage.token);
+      }
       history.push('/');
     }
 

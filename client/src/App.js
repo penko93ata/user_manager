@@ -5,7 +5,7 @@ import Home from './components/pages/Home';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 import PrivateRoute from './components/PrivateRoute';
-import axios from 'axios';
+import setAuthToken from './components/setAuthToken';
 
 import { Provider } from 'react-redux';
 import store from './store';
@@ -13,14 +13,6 @@ import store from './store';
 import 'materialize-css/dist/css/materialize.min.css';
 import M from 'materialize-css/dist/js/materialize.min.js';
 import './App.css';
-
-const setAuthToken = token => {
-  if (token) {
-    axios.defaults.headers.common['x-auth-token'] = token;
-  } else {
-    delete axios.defaults.headers.common['x-auth-token'];
-  }
-};
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
