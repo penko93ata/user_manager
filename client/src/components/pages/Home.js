@@ -24,11 +24,7 @@ const Home = ({ loadUser }) => {
   );
 };
 
-const mapPropsToState = state => ({
-  user: state.auth
-});
-
 export default connect(
-  mapPropsToState,
+  null,
   { loadUser }
 )(Home);

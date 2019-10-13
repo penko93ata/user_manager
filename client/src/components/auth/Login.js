@@ -28,7 +28,7 @@ const Login = ({ login, clearErrors, error, isAuthenticated, history }) => {
   const onSubmit = e => {
     e.preventDefault();
     if (email === '' || password === '') {
-      console.log('Please fill in email and password');
+      M.toast({ html: 'Please fill in email and password' });
     } else {
       login({
         email,

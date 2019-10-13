@@ -3,14 +3,14 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { logout } from '../../actions/authActions';
 
-const Navbar = ({ logout, user, isAuthenticated }) => {
+const Navbar = ({ logout, isAuthenticated }) => {
   const onLogout = () => {
     logout();
   };
 
   const authLinks = (
     <Fragment>
-      <li>Hello {user.name}</li>
+      <li>Logout</li>
       <li>
         <a onClick={onLogout} href="#!">
           <i className="material-icons">exit_to_app</i>
