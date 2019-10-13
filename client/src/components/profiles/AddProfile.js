@@ -29,7 +29,12 @@ const AddProfile = ({ addProfile }) => {
       M.toast({ html: 'New profile added' });
 
       // Clear form fields
-      setProfile({});
+      setProfile({
+        name: '',
+        email: '',
+        description: '',
+        phone: ''
+      });
     }
   };
 

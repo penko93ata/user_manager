@@ -24,8 +24,8 @@ const Profiles = ({
       <li className="collection-header">
         <h4 className="center">Profiles Collection</h4>
       </li>
-      {!loading && profiles.length === 0 ? (
-        <p className="center">No profiles to show...</p>
+      {!loading && profiles.length === 0 && profiles !== null ? (
+        <p className="center">Add a new profile</p>
       ) : filtered !== null ? (
         filtered.map(profile => (
           <ProfileItem profile={profile} key={profile._id} />

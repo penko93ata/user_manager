@@ -1,6 +1,7 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import M from 'materialize-css/dist/js/materialize.min.js';
+import PropTypes from 'prop-types';
 
 import { register, clearErrors } from '../../actions/authActions';
 
@@ -106,10 +107,9 @@ const Register = ({ register, isAuthenticated, error, history }) => {
   );
 };
 
-// Register.propTypes = {
-//   user: PropTypes.object.isRequired,
-//   register: PropTypes.func.isRequired
-// };
+Register.propTypes = {
+  register: PropTypes.func.isRequired
+};
 
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,

@@ -37,7 +37,12 @@ const EditProfile = ({ current, updateProfile }) => {
       M.toast({ html: 'Profile updated' });
 
       // Clear form fields
-      setProfile({});
+      setProfile({
+        name: '',
+        email: '',
+        description: '',
+        phone: ''
+      });
     }
   };
 

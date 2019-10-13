@@ -2,6 +2,7 @@ import React, { Fragment, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { login, clearErrors } from '../../actions/authActions';
 import M from 'materialize-css/dist/js/materialize.min.js';
+import PropTypes from 'prop-types';
 
 const Login = ({ login, clearErrors, error, isAuthenticated, history }) => {
   useEffect(() => {
@@ -74,6 +75,10 @@ const Login = ({ login, clearErrors, error, isAuthenticated, history }) => {
       </div>
     </Fragment>
   );
+};
+
+Login.propTypes = {
+  login: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
