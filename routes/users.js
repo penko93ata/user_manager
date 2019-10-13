@@ -16,7 +16,7 @@ module.exports = [
 
         // Check if user exists in the database
         if (user) {
-          return h.response({ msg: 'User already exists' }).code(400);
+          return h.response({ message: 'User already exists' }).code(400);
         }
 
         // Add new user object
@@ -58,10 +58,16 @@ module.exports = [
             .required(),
           email: Joi.string()
             .email()
-            .required(),
+            .required()
+            .error(new Error('Please enter a valid email address')),
           password: Joi.string()
             .regex(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$/)
             .required()
+            .error(
+              new Error(
+                'Password must 8-15 characters with at least 1 digit, 1 lowercase and 1 uppercase character'
+              )
+            )
         }
       }
     }

@@ -14,7 +14,7 @@ const AddProfile = ({ addProfile }) => {
 
   const { name, email, description, phone } = profile;
 
-  const onSubmit = () => {
+  const onSubmit = e => {
     if (name === '' || email === '') {
       M.toast({ html: 'Name and email are required fields' });
     } else {

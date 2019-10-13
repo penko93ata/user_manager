@@ -45,13 +45,13 @@ module.exports = [
         let user = await User.findOne({ email });
 
         if (!user) {
-          return h.response({ msg: 'Invalid Credentials' }).code(400);
+          return h.response({ message: 'Invalid Credentials' }).code(400);
         }
 
         const isMatch = await bcrypt.compare(password, user.password);
 
         if (!isMatch) {
-          return h.response({ msg: 'Invalid Credentials' }).code(400);
+          return h.response({ message: 'Invalid Credentials' }).code(400);
         }
 
         const payload = {
@@ -74,10 +74,16 @@ module.exports = [
         payload: {
           email: Joi.string()
             .email()
-            .required(),
+            .required()
+            .error(new Error('Please enter a valid email address')),
           password: Joi.string()
             .regex(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$/)
             .required()
+            .error(
+              new Error(
+                'Password must 8-15 characters with at least 1 digit, 1 lowercase and 1 uppercase character'
+              )
+            )
         }
       }
     }

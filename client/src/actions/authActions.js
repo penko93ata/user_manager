@@ -38,7 +38,7 @@ export const register = formData => async dispatch => {
   } catch (err) {
     dispatch({
       type: REGISTER_FAIL,
-      payload: err.response.data.msg
+      payload: err.response.data.message
     });
   }
 };
@@ -62,7 +62,7 @@ export const login = formData => async dispatch => {
   } catch (err) {
     dispatch({
       type: LOGIN_FAIL,
-      payload: err.response.data.msg
+      payload: err.response.data.message
     });
   }
 };

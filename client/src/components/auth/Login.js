@@ -19,6 +19,11 @@ const Login = ({ login, clearErrors, error, isAuthenticated, history }) => {
       M.toast({ html: error });
       clearErrors();
     }
+
+    if (error === 'Invalid request payload input') {
+      M.toast({ html: 'Please enter valid email and password' });
+      clearErrors();
+    }
   }, [isAuthenticated, history, clearErrors, error]);
 
   const [user, setUser] = useState({

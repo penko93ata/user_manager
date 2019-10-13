@@ -20,6 +20,11 @@ const Register = ({ register, isAuthenticated, error, history }) => {
       M.toast({ html: error });
       clearErrors();
     }
+
+    if (error === 'Invalid request payload input') {
+      M.toast({ html: 'Please enter valid email and password' });
+      clearErrors();
+    }
   }, [error, isAuthenticated, history]);
 
   const [user, setUser] = useState({
